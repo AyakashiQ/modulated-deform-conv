@@ -1,5 +1,9 @@
 #include "config.h"
 
+#ifndef AT_CHECK
+#define AT_CHECK TORCH_CHECK 
+#endif
+
 template <typename scalar_t>
 __device__ scalar_t deform_conv2d_im2col_bilinear(
 		const scalar_t *bottom_data, const int data_width,

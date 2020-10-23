@@ -1,5 +1,9 @@
 #include "config.h"
 
+#ifndef AT_CHECK
+#define AT_CHECK TORCH_CHECK 
+#endif
+
 template <typename scalar_t>
 __device__ scalar_t deform_conv3d_im2col_trilinear(
 		const scalar_t *bottom_data, const int data_width,const int data_length,
@@ -201,9 +205,9 @@ int deform_conv3d_forward_cuda(
   const int step=GET_STEP(batch,in_step);
 
 #ifdef DEBUG
-  print_tensor_size("deform_conv3d_forward_cuda---output size",output);
-  print_tensor_size("deform_conv3d_forward_cuda---input size",input);
-  print_tensor_size("deform_conv3d_forward_cuda---offset size",offset);
+  #print_tensor_size("deform_conv3d_forward_cuda---output size",output);
+  #print_tensor_size("deform_conv3d_forward_cuda---input size",input);
+  #print_tensor_size("deform_conv3d_forward_cuda---offset size",offset);
 #endif
 
   output = output.view({batch / step, step, channels_out,height_out, width_out,length_out});
